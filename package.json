@@ -2,7 +2,7 @@
     "name": "Bad Dragon Armband",
     "author": "JustNU",
     "version": "1.0.2",
-    "license": "MIT",
+    "license": "Unlicense",
     "main": "src/mod.js",
 	"akiVersion": "3.4.*",
 	"isBundleMod": true,
