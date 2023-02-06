@@ -24,12 +24,9 @@ class Mod
 				for (const localeID in database.locales.global) {
 					// en placeholder
 					if (enLocale[itemId]) {
-						if (enLocale[itemId].Name)
-							database.locales.global[localeID][`${itemId} Name`] = enLocale[itemId].Name;
-						if (enLocale[itemId].ShortName)
-							database.locales.global[localeID][`${itemId} ShortName`] = enLocale[itemId].ShortName;
-						if (enLocale[itemId].Description)
-							database.locales.global[localeID][`${itemId} Description`] = enLocale[itemId].Description;
+						for (const localeItemEntry in enLocale[itemId]) {
+							database.locales.global[localeID][`${itemId} ${localeItemEntry}`] = enLocale[itemId][localeItemEntry];
+						}
 					}
 					
 					// actual locale
@@ -37,15 +34,11 @@ class Mod
 						const actualLocale = require(`../locales/${localeID}.json`);
 
 						if (actualLocale[itemId]) {
-							if (actualLocale[itemId].Name)
-								database.locales.global[localeID][`${itemId} Name`] = actualLocale[itemId].Name;
-							if (actualLocale[itemId].ShortName)
-								database.locales.global[localeID][`${itemId} ShortName`] = actualLocale[itemId].ShortName;
-							if (actualLocale[itemId].Description)
-								database.locales.global[localeID][`${itemId} Description`] = actualLocale[itemId].Description;
+							for (const localeItemEntry in actualLocale[itemId]) {
+								database.locales.global[localeID][`${itemId} ${localeItemEntry}`] = actualLocale[itemId][localeItemEntry];
+							}
 						}
 					}
-					
 				}
 				
 				// add item retexture that is 1:1 to original item
