@@ -8,14 +8,14 @@ class Mod
 		// Constants
 		const logger = container.resolve("WinstonLogger");
 		const database = container.resolve("DatabaseServer").getTables();
-		const jsonUtil = container.resolve("JsonUtil");
 		const core = container.resolve("JustNUCore");
 		const VFS = container.resolve("VFS");
-		const modDb = `user/mods/zBadDragonArmband/db/`;
+		const modLoader = container.resolve("PreAkiModLoader");
 		const config = require("../config/config.json");
 		const itemConfig = require("../config/itemConfig.json");
 		const itemData = require("../db/items/itemData.json");
-		const enLocale = jsonUtil.deserialize(VFS.readFile(`${modDb}/locales/en.json`));
+		const enLocale = require(`../db/locales/en.json`);
+		const modPath = modLoader.getModPath("Bad Dragon Armband");
 		
 		//add retextures
 		for (const categoryId in itemConfig) {
@@ -33,8 +33,8 @@ class Mod
 					}
 					
 					// actual locale
-					if (VFS.exists(`${modDb}/locales/${localeID}.json`) && localeID != "en") {
-						const actualLocale = jsonUtil.deserialize(VFS.readFile(`${modDb}/locales/${localeID}.json`));
+					if (VFS.exists(`${modPath}locales/${localeID}.json`) && localeID != "en") {
+						const actualLocale = require(`../locales/${localeID}.json`);
 
 						if (actualLocale[itemId]) {
 							if (actualLocale[itemId].Name)
@@ -50,7 +50,9 @@ class Mod
 				
 				// add item retexture that is 1:1 to original item
 				if (itemConfig[categoryId][itemId]) {
-					core.addItemRetexture(itemId, itemData[itemId].BaseItemID, itemData[itemId].BundlePath, config.EnableTradeOffers, config.AddToBots, itemData[itemId].LootWeigthMult);
+					const data = itemData[itemId];
+					
+					core.addItemRetexture(itemId, data.BaseItemID, data.BundlePath, config.EnableTradeOffers, config.AddToBots, data.LootWeigthMult);
 				}
 			}
 		}
