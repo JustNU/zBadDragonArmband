@@ -29,7 +29,7 @@ class Mod
 					}
 					
 					// actual locale
-					if (VFS.exists(`${modPath}locales\\${localeID}.json`) && localeID != "en") {
+					if (VFS.exists(`${modPath}\\locales\\${localeID}.json`) && localeID != "en") {
 						const actualLocale = require(`../locales/${localeID}.json`);
 
 						if (actualLocale[itemId]) {
