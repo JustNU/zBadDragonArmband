@@ -10,12 +10,11 @@ class Mod
 		const database = container.resolve("DatabaseServer").getTables();
 		const core = container.resolve("JustNUCore");
 		const VFS = container.resolve("VFS");
-		const modLoader = container.resolve("PreAkiModLoader");
 		const config = require("../config/config.json");
 		const itemConfig = require("../config/itemConfig.json");
 		const itemData = require("../db/items/itemData.json");
 		const enLocale = require(`../db/locales/en.json`);
-		const modPath = modLoader.getModPath("Bad Dragon Armband");
+		const modPath = __dirname.split("\\").slice(0, -1).join("\\");
 		
 		//add retextures
 		for (const categoryId in itemConfig) {
@@ -30,7 +29,7 @@ class Mod
 					}
 					
 					// actual locale
-					if (VFS.exists(`${modPath}locales/${localeID}.json`) && localeID != "en") {
+					if (VFS.exists(`${modPath}locales\\${localeID}.json`) && localeID != "en") {
 						const actualLocale = require(`../locales/${localeID}.json`);
 
 						if (actualLocale[itemId]) {
