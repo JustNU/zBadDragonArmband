@@ -1,0 +1,14 @@
+{
+    "manifest": [
+        {
+            "key": "BadDragonArmband/Armbands/Armband.bundle",
+            "dependencyKeys": [
+				"shaders",
+				"assets/content/characters/character/armband/materials.bundle",
+				"cubemaps",
+				"assets/commonassets/physics/physicsmaterials.bundle",
+				"assets/content/characters/character/armband.bundle"
+            ]
+        }
+    ]
+}
